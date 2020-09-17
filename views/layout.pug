@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Knowledgebase
+    link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel="stylesheet" type="text/css" href="/css/styles.css")
+  body
+    nav.navbar.navbar-expand-sm.navbar-dark.bg-dark.mb-3
+      a.navbar-brand.mx-4.float-left(href='/') Knowledgebase
+      ul.navbar-nav.mx-4
+        li.nav-item
+          a.nav-link(href='/') Home
+        if user
+          li.nav-item
+            a.nav-link(href='/articles/add') Add Article
+      ul.navbar-nav.mx-4
+        if user
+          li.nav-item
+            a.nav-link(href='/users/logout') Logout
+        else
+          li.nav-item
+            a.nav-link(href='/users/register') Register
+          li.nav-item
+            a.nav-link(href='/users/login') Login
+
+    .container
+      != messages('message', locals)
+      if errors
+        each error, i in errors
+          div(class="alert alert-danger") #{error.msg}
+      block content
+      br
+      hr
+      footer
+        p Copyright &copy; 2020
+    script(src='/bower_components/jquery/dist/jquery.js')
+    script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+    script(src='/js/main.js')
